@@ -12,19 +12,19 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
             color: #333;
             background-color: #F5E6D3;        }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         header {
             background: linear-gradient(135deg, #8B7355 0%, #5C4033 100%);            color: white;
             padding: 30px 20px;
@@ -33,12 +33,12 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        
+
         header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
         }
-        
+
         .crisis-info {
                         text-align: center;
             background-color: #C17817;            color: white;
@@ -47,17 +47,17 @@
             margin-bottom: 30px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        
+
         .crisis-info h2 {
             margin-bottom: 15px;
             font-size: 1.5em;
         }
-        
+
         .crisis-info p {
             font-size: 1.1em;
             line-height: 1.8;
         }
-        
+
         .ai-assistant {
             background: white;
             padding: 20px;
@@ -65,32 +65,119 @@
             margin-bottom: 30px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        
+
         .ai-assistant h2 {
-            color: #667eea;
-            margin-bottom: 15px;
+            color: #5C4033;
+            margin-bottom: 10px;
+            font-size: 1.4em;
         }
-        
-        .ai-assistant p {
+
+        .ai-assistant > p {
             margin-bottom: 20px;
             color: #666;
         }
-        
-        .embed-container {
-            position: relative;
-            width: 100%;
-            height: 850px;
-            border-radius: 8px;
-            overflow: hidden;
+
+        /* ── Custom Chat Widget ── */
+        #pcc-chat-container {
+            background: #fff;
+            border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
-        
-        .embed-container iframe {
-            width: 100%;
-            height: 100%;
+
+        #pcc-messages {
+            height: 480px;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            background: #fafafa;
+        }
+
+        .pcc-msg {
+            max-width: 82%;
+            padding: 12px 16px;
+            border-radius: 14px;
+            line-height: 1.55;
+            font-size: 0.97em;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .pcc-msg.bot {
+            background: #f0e8df;
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .pcc-msg.user {
+            background: #5C4033;
+            color: #fff;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+
+        #pcc-thinking {
+            display: none;
+            padding: 8px 20px 4px;
+            color: #8a6a52;
+            font-style: italic;
+            font-size: 0.9em;
+            align-self: flex-start;
+            margin-left: 20px;
+        }
+
+        #pcc-thinking span {
+            display: inline-block;
+            animation: pcc-dots 1.4s infinite;
+        }
+        #pcc-thinking span:nth-child(2) { animation-delay: 0.2s; }
+        #pcc-thinking span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes pcc-dots {
+            0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+            40%            { opacity: 1;   transform: scale(1); }
+        }
+
+        #pcc-input-row {
+            display: flex;
+            gap: 10px;
+            padding: 14px 16px;
+            border-top: 1px solid #e8ddd3;
+            background: #fff;
+        }
+
+        #pcc-input {
+            flex: 1;
+            padding: 11px 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 0.97em;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #pcc-input:focus { border-color: #8B7355; }
+
+        #pcc-send {
+            background: #5C4033;
+            color: white;
             border: none;
+            border-radius: 8px;
+            padding: 11px 22px;
+            font-size: 0.97em;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
         }
-        
+
+        #pcc-send:hover:not(:disabled) { background: #8B7355; }
+        #pcc-send:disabled { opacity: 0.55; cursor: not-allowed; }
+
         .resources {
             background: white;
             padding: 30px;
@@ -98,29 +185,29 @@
             margin-bottom: 30px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        
+
         .resources h2 {
             color: #667eea;
             margin-bottom: 20px;
             border-bottom: 3px solid #667eea;
             padding-bottom: 10px;
         }
-        
+
         .resource-category {
             margin-bottom: 25px;
         }
-        
+
         .resource-category h3 {
             color: #764ba2;
             margin-bottom: 10px;
             font-size: 1.3em;
         }
-        
+
         .resource-category ul {
             list-style: none;
             padding-left: 0;
         }
-        
+
         .resource-category li {
             padding: 10px;
             margin-bottom: 8px;
@@ -128,7 +215,7 @@
             border-left: 4px solid #667eea;
             border-radius: 4px;
         }
-        
+
         footer {
             background: #333;
             color: white;
@@ -137,50 +224,113 @@
             border-radius: 8px;
             margin-top: 30px;
         }
-        
+
         footer p {
             margin: 5px 0;
             font-size: 0.9em;
         }
-        
+
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8em;
-            }
-            
-            .embed-container {
-                height: 500px;
-            }
-            
-            .container {
-                padding: 10px;
-            }
+            header h1 { font-size: 1.8em; }
+            #pcc-messages { height: 360px; }
+            .container { padding: 10px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-                        <img src="1061b6fd-9319-4389-85b3-60b448e96929.png" alt="Phoenix Care Connects Logo" style="max-width: 150px; height: auto; margin-bottom: 20px;">
+            <a href="/">
+                <img src="1061b6fd-9319-4389-85b3-60b448e96929.png" alt="Phoenix Care Connects Logo" style="width:130px;height:130px;object-fit:contain;border-radius:8px;margin-bottom:12px;">
+            </a>
             <h1>Phoenix Care Connects</h1>
             <p>Find shelter, food, healthcare, and support services in Phoenix, Arizona</p>
         </header>
-        
+
         <div class="ai-assistant">
-            <div class="embed-container">
-                <iframe 
-                    src="https://app.mindstudio.ai/agents/f15f37a7-8b7f-4440-b009-3cd6c89a32da/run?GuestAccessKey=pk_e226a903b6af055412aa141f151cd5852f50ac24b1a2195a43e83fcca0d252ef" 
-                    allow="autoplay;clipboard-write;picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+            <h2>Homeless Services AI Agent</h2>
+            <p>Ask me anything about shelter, food, healthcare, or support services in Phoenix. I&rsquo;m here to help 24/7.</p>
+
+            <div id="pcc-chat-container">
+                <div id="pcc-messages">
+                    <div class="pcc-msg bot">Hello! I can help you find shelter, food, healthcare, and other support services in Phoenix, Arizona. What do you need help with today?</div>
+                </div>
+                <div id="pcc-thinking"><span>&bull;</span><span>&bull;</span><span>&bull;</span>&nbsp; Finding resources for you&hellip;</div>
+                <div id="pcc-input-row">
+                    <input id="pcc-input" type="text" placeholder="e.g. I need shelter tonight&hellip;" autocomplete="off" />
+                    <button id="pcc-send">Send</button>
+                </div>
             </div>
         </div>
-        
+
         <footer>
             <p><strong>Disclaimer:</strong> Information provided may change. Always call ahead to confirm services and availability.</p>
             <p>This is not an emergency service. For emergencies, dial 911.</p>
             <p>Last updated: February 2026</p>
         </footer>
     </div>
+
+    <script>
+    (function () {
+        var APP_ID    = 'f15f37a7-8b7f-4440-b009-3cd6c89a32da';
+        var API_BASE  = 'https://api.mindstudio.ai/developer/v2/apps/run';
+        var GUEST_KEY = 'pk_e226a903b6af055412aa141f151cd5852f50ac24b1a2195a43e83fcca0d252ef';
+
+        var messagesDiv = document.getElementById('pcc-messages');
+        var input       = document.getElementById('pcc-input');
+        var sendBtn     = document.getElementById('pcc-send');
+        var thinking    = document.getElementById('pcc-thinking');
+
+        function addMsg(text, isUser) {
+            var el = document.createElement('div');
+            el.className = 'pcc-msg ' + (isUser ? 'user' : 'bot');
+            el.textContent = text;
+            messagesDiv.appendChild(el);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        async function send() {
+            var msg = input.value.trim();
+            if (!msg) return;
+            addMsg(msg, true);
+            input.value = '';
+            sendBtn.disabled = true;
+            thinking.style.display = 'block';
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+            try {
+                var res = await fetch(API_BASE, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer ' + GUEST_KEY,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        appId: APP_ID,
+                        variables: { userMessage: msg }
+                    })
+                });
+                var data = await res.json();
+                var reply =
+                    (data && data.result && (data.result.response || data.result.output || data.result.finalResponse))
+                    || (data && data.output)
+                    || (data && typeof data.result === 'string' && data.result)
+                    || 'I received your message. Please call 211 or 602-262-6251 for immediate assistance.';
+                addMsg(reply, false);
+            } catch (err) {
+                addMsg('Sorry, I had trouble connecting. Please call 211 or 602-262-6251 for immediate help.', false);
+            } finally {
+                thinking.style.display = 'none';
+                sendBtn.disabled = false;
+                input.focus();
+            }
+        }
+
+        sendBtn.addEventListener('click', send);
+        input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && !e.shiftKey) send();
+        });
+    })();
+    </script>
 </body>
 </html>
